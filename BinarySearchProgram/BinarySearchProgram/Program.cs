@@ -1,0 +1,106 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BinarySearchProgram
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // declare variables
+            const int MaxListSize = 1000;
+            string MenuItem;
+            int[] NumList = new int[MaxListSize];
+            // program loop
+            do
+            {
+                // display menu and get menu choice
+                MenuItem = GetMenuChoice();
+                // do something with the menu choice
+                switch (MenuItem)
+                {
+                    case "1":
+                        Array.Clear(NumList,0,0);
+                        Random RanNum = new Random();
+                        for (int i = 0; i < MaxListSize; i++) {
+                            NumList[i] = RanNum.Next(1,10000);
+                        } 
+                        break;
+                    case "2":
+                        for (int i = 0; i < MaxListSize; i++)
+                        {
+                            Console.WriteLine(NumList[i]);
+                        }
+                        break;
+                    case "3":
+                        Array.Sort(NumList);
+                        break;
+                    case "4":
+                        BinarySearch(ref NumList);
+                        break;
+                    case "5":
+                        break;
+                    default:
+                        Console.WriteLine("invalid selection");
+                        break;
+                }
+            }
+            while (MenuItem != "5");
+            Console.WriteLine("end of program");
+            Console.ReadLine();
+        }
+
+        public static void BinarySearch(ref int[] TheList)
+        {
+            int low = 0;
+            int high = 999;
+            int middle = -1;
+            bool found = false;
+            int x = Convert.ToInt32(Console.ReadLine());
+           
+            do
+            {
+                middle = ((low + high) / 2);
+                if (TheList[middle] == x)
+                {
+                    found = true;
+                }
+                else
+                {
+                    if (TheList[middle] > x)
+                    {
+                        high = middle - 1;
+                    }
+                    else
+                    {
+                        low = middle + 1;
+                    }
+                }
+            } while (found == false && high != low );
+            if (found == true)
+            {
+                Console.WriteLine( x + " was found in position " + middle);
+                Console.ReadLine();
+            }
+            
+        }
+
+        public static string GetMenuChoice()
+        {
+            //display menu
+            Console.WriteLine();
+            Console.WriteLine("1) Generate List");
+            Console.WriteLine("2) Display List");
+            Console.WriteLine("3) Sort List");
+            Console.WriteLine("4) Binary Search List");
+            Console.WriteLine("5) Exit program");
+            Console.WriteLine();
+            Console.WriteLine("Enter your menu choice number");
+            // get choice and return the value
+            return Console.ReadLine();
+        }
+    }
+}
