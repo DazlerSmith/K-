@@ -16,10 +16,10 @@ namespace ChessGame2._0
         {
             GraphicsDeviceManager graphics;
             SpriteBatch spriteBatch;
-            Texture2D pixel;
-            Board test;
-            Texture2D PieceTexture;
-
+            Texture2D pixel;   //Squares
+            Board test;        //Group of contained squares
+            Texture2D PieceTexture;    //Pieces
+         
             public Game1()
             {
                 graphics = new GraphicsDeviceManager(this);
@@ -36,7 +36,7 @@ namespace ChessGame2._0
             {
             // TODO: Add your initialization logic here
             IsMouseVisible = true;
-                base.Initialize();
+                base.Initialize(); //User can see the mouse.
 
             }
 
@@ -60,7 +60,7 @@ namespace ChessGame2._0
                 test = new Board(pixel);
 
 
-                PieceTexture = Content.Load<Texture2D>("White Pawn Sprite");
+                PieceTexture = Content.Load<Texture2D>("White Pawn Sprite"); //How every Piece is drawn to the board when the program is launched
             Piece temp;
             for (int i = 0; i < 8; i++)
             {
@@ -170,12 +170,12 @@ namespace ChessGame2._0
             protected override void Update(GameTime gameTime)
             {
                 if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                    Exit();
+                    Exit(); 
 
             
             if (Mouse.GetState().LeftButton == ButtonState.Pressed)
              {
-                test.ClickBoard(Mouse.GetState().X,Mouse.GetState().Y);
+                test.ClickBoard(Mouse.GetState().X,Mouse.GetState().Y); //Gets coordinates of mouse when clicked.
 
              }
 
@@ -193,9 +193,7 @@ namespace ChessGame2._0
                 GraphicsDevice.Clear(Color.CornflowerBlue);
 
                 spriteBatch.Begin();
-                // Draw a fancy purple rectangle.  
                 test.Draw(spriteBatch);
-                //spriteBatch.Draw(PieceTexture, new Rectangle(200,200,50,50), Color.White); TEST
                 spriteBatch.End();
 
                 // TODO: Add your drawing code here
